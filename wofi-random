@@ -1,45 +1,29 @@
 #!/bin/bash
 
-# Open wofi dmenu for input, suppress errors since there are no predefined options
 input=$(wofi --dmenu 2>/dev/null)
 
-# Exit if no input or cancelled
 [[ -z "$input" ]] && exit 1
 
-# Extract the last token as length
 length="${input##* }"
-
-# Remove the length from input to get flags
 flags="${input% *}"
-
-# Initialize flags
 use_digits=0
 use_letters=0
 use_capitals=0
 
-# Check for digits (0-9)
 [[ "$flags" =~ [0-9] ]] && use_digits=1
-
-# Check for lowercase letters (a-z)
 [[ "$flags" =~ [a-z] ]] && use_letters=1
-
-# Check for uppercase letters (A-Z)
 [[ "$flags" =~ [A-Z] ]] && use_capitals=1
 
-# Build character set based on flags
 charset=""
 [[ $use_digits -eq 1 ]] && charset+="0-9"
 [[ $use_letters -eq 1 ]] && charset+="a-z"
 [[ $use_capitals -eq 1 ]] && charset+="A-Z"
 
-# If no valid flags were set, exit
 if [[ -z "$charset" ]]; then
     echo "Error: No valid character types found in input"
     exit 1
 fi
 
-# Generate random string using /dev/urandom with tr piping
 random_string=$(tr -dc "$charset" < /dev/urandom | head -c "$length")
 
-# Type the password using ydotool
 ydotool type -d 0 "$random_string"
