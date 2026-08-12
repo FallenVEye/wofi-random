@@ -1,3 +1,5 @@
+Disclaimer: AI was involed in creation of this script
+
 # A hotkey random generator
 
 ## Description
