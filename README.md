@@ -13,6 +13,7 @@ The input consists of two parts separated by a space:
   - `1` or any digit (0-9) → include digits
   - `a-z` or any lowercase letter → include lowercase letters
   - `A-Z` or any uppercase letter → include uppercase letters
+  - `! @ # $ % ^ & * - _ = +` → include special characters
 - The script only checks for the *presence* of these character types; the actual characters/digits you use don't matter
   - `1gN`, `f3H`, `13g2CnG`, `8Vd4`, `69Nice` all generate strings with digits, lowercase, and uppercase letters
   - Only the *types* present matter, not their count or order
@@ -30,3 +31,6 @@ Generate random **digits and lowercase letters**, length 8:
 
 Generate random **digits and [lower/upper]case letters**, length 16:
 - Input: `1fG 16` → Output: `7481SU05pHWlnbl`
+
+Generate random **digits, letters, and special characters**, length 20:
+- Input: `1aZ! 20` → Output: `7k#R$9@2mP!x%5&Q^8L`

@@ -9,15 +9,18 @@ flags="${input% *}"
 use_digits=0
 use_letters=0
 use_capitals=0
+use_special=0
 
 [[ "$flags" =~ [0-9] ]] && use_digits=1
 [[ "$flags" =~ [a-z] ]] && use_letters=1
 [[ "$flags" =~ [A-Z] ]] && use_capitals=1
+[[ "$flags" =~ [\!\@\#\$\%\^\&\*\-_=\+] ]] && use_special=1
 
 charset=""
 [[ $use_digits -eq 1 ]] && charset+="0-9"
 [[ $use_letters -eq 1 ]] && charset+="a-z"
 [[ $use_capitals -eq 1 ]] && charset+="A-Z"
+[[ $use_special -eq 1 ]] && charset+="\!@#$%^&*\-_=+"
 
 if [[ -z "$charset" ]]; then
     echo "Error: No valid character types found in input"
